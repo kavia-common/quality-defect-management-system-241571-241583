@@ -121,6 +121,11 @@ export MYSQL_DB="${DB_NAME}"
 export MYSQL_PORT="${DB_PORT}"
 EOF
 
+# Initialize application schema (idempotent)
+echo "Initializing application schema..."
+chmod +x ./init_schema.sh 2>/dev/null || true
+./init_schema.sh
+
 echo "MySQL setup complete!"
 echo "Database: ${DB_NAME}"
 echo "Root user: root (password: ${DB_PASSWORD})"
